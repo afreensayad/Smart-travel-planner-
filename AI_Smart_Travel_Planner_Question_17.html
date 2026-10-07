@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Smart Travel Planner</title>
+    <style>
+        body { font-family: Arial; background: #f2f6ff; margin: 0; }
+        header { background: #243b55; color: white; text-align: center; padding: 25px; }
+        .container { width: 90%; max-width: 700px; margin: 30px auto; }
+        .box { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px #ccc; }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 13px; margin-top: 20px; background: #243b55; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+        #result { margin-top: 20px; display: none; }
+        .day { background: #f5f7fa; padding: 15px; margin: 10px 0; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>✈️ AI Smart Travel Planner</h1>
+    <p>Plan your trip easily with personalized recommendations</p>
+</header>
+<div class="container">
+    <div class="box">
+        <h2>Plan Your Trip</h2>
+        <label>Destination</label>
+        <input type="text" id="destination" placeholder="Example: Goa">
+        <label>Number of Days</label>
+        <input type="number" id="days" placeholder="Example: 3">
+        <label>Budget (₹)</label>
+        <input type="number" id="budget" placeholder="Example: 10000">
+        <label>Interest</label>
+        <select id="interest">
+            <option value="Nature">Nature</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Culture">Culture & History</option>
+            <option value="Food">Food</option>
+            <option value="Shopping">Shopping</option>
+        </select>
+        <button onclick="generatePlan()">Generate Travel Plan</button>
+        <div id="result">
+            <h2>🌍 Your Travel Plan</h2>
+            <p><b>Destination:</b> <span id="showDestination"></span></p>
+            <p><b>Budget:</b> ₹<span id="showBudget"></span></p>
+            <p><b>Interest:</b> <span id="showInterest"></span></p>
+            <h3>📅 Itinerary</h3>
+            <div id="itinerary"></div>
+            <h3>🎒 Packing List</h3>
+            <ul>
+                <li>Comfortable clothes</li><li>Walking shoes</li><li>Phone and charger</li>
+                <li>Water bottle</li><li>Travel documents</li><li>Personal medicines</li>
+            </ul>
+            <h3>💡 Travel Tips</h3>
+            <ul>
+                <li>Check the weather before travelling.</li>
+                <li>Keep emergency money.</li>
+                <li>Keep your documents safe.</li>
+                <li>Book accommodation in advance.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+function generatePlan() {
+    let destination = document.getElementById("destination").value;
+    let days = parseInt(document.getElementById("days").value);
+    let budget = document.getElementById("budget").value;
+    let interest = document.getElementById("interest").value;
+    if (destination === "" || !days || budget === "") { alert("Please enter all details!"); return; }
+    document.getElementById("showDestination").innerText = destination;
+    document.getElementById("showBudget").innerText = budget;
+    document.getElementById("showInterest").innerText = interest;
+    let itinerary = document.getElementById("itinerary");
+    itinerary.innerHTML = "";
+    for (let i = 1; i <= days; i++) {
+        itinerary.innerHTML += `<div class="day"><h4>Day ${i}</h4><p>🌅 Morning: Explore ${destination}</p><p>🍴 Afternoon: Enjoy local food</p><p>🌆 Evening: Visit popular places</p></div>`;
+    }
+    document.getElementById("result").style.display = "block";
+}
+</script>
+</body>
+</html>
